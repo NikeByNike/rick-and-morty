@@ -29,7 +29,7 @@
     "ts-check": "tsc -p tsconfig.json --noEmit",
     "lint": "prettier --write './src/**/*.{js,jsx,ts,tsx}' && git add .",
     "all-tests": "npm run ts-check && npm run lint && npm run tests",
-    "deploy": "npm run all-tests && npm run build && firebase deploy -hosting"
+    "deploy": "npm run all-tests && npm run build && firebase deploy --only hosting"
   },
   "husky": {
     "hooks": {
