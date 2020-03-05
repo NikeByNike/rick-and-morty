@@ -21,3 +21,13 @@ npm run build
 ```
 npm run test
 ```
+
+##Run typescript check
+```
+npm run ts-check
+```
+
+##Format project
+```
+npm run lint
+```
