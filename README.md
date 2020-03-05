@@ -19,7 +19,7 @@ npm run build
 
 ##Run tests
 ```
-npm run test
+npm run tests
 ```
 
 ##Run typescript check
@@ -30,4 +30,14 @@ npm run ts-check
 ##Format project
 ```
 npm run lint
+```
+
+##Check and lint all project
+```
+npm run all-tests
+```
+
+##Deploy project to the Firebase(run all tests before)
+```
+npm run deploy
 ```

@@ -25,13 +25,15 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "CI=true react-scripts test",
+    "tests": "CI=true react-scripts test",
     "ts-check": "tsc -p tsconfig.json --noEmit",
-    "lint": "prettier --write './src/**/*.{js,jsx,ts,tsx}'"
+    "lint": "prettier --write './src/**/*.{js,jsx,ts,tsx}'",
+    "all-tests": "npm run ts-check && npm run lint && npm run tests",
+    "deploy": "npm run all-tests && npm run build && firebase deploy -hosting"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run ts-check && npm run lint && npm run test"
+      "pre-commit": "npm run all-tests"
     }
   },
   "eslintConfig": {
