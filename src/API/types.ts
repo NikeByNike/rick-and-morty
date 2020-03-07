@@ -3,4 +3,5 @@ export interface Character {
   name: string
   image: string
   isSelected: boolean
+  isInBanList: boolean
 }

@@ -8,6 +8,7 @@ const GET_CHARACTERS_BY_NAME = gql`
         name
         image
         isSelected @client
+        isInBanList @client
       }
     }
   }
@@ -33,9 +34,21 @@ const GET_SELECTED_MORTY = gql`
   }
 `
 
-const CHANGE_IS_SELECTED = gql`
-  mutation changeIsSelected($id: String!, $isSelected: Boolean!) {
-    changeIsSelected(id: $id, isSelected: $isSelected) @client
+const GET_BAN_LIST = gql`
+  query {
+    banList @client
+  }
+`
+
+const SELECT_RICK = gql`
+  mutation selectRick($character: Character) {
+    selectRick(character: $character) @client
+  }
+`
+
+const SELECT_MORTY = gql`
+  mutation selectMorty($character: Character) {
+    selectMorty(character: $character) @client
   }
 `
 
@@ -51,11 +64,20 @@ const CHANGE_SEARCH_TERM = gql`
   }
 `
 
+const ADD_TO_BAN_LIST = gql`
+  mutation addToBanList($id: String!) {
+    addToBanList(id: $id) @client
+  }
+`
+
 export default {
   GET_CHARACTERS_BY_NAME,
   GET_SELECTED_RICK,
   GET_SELECTED_MORTY,
-  CHANGE_IS_SELECTED,
+  GET_BAN_LIST,
+  SELECT_RICK,
+  SELECT_MORTY,
   GET_SEARCH_TERM,
-  CHANGE_SEARCH_TERM
+  CHANGE_SEARCH_TERM,
+  ADD_TO_BAN_LIST
 }
