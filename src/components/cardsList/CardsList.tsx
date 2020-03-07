@@ -1,27 +1,17 @@
 import React, { useCallback } from 'react'
 import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks'
-import styled from 'styled-components'
 import querys from '../../API/querys'
 import { Character } from '../../API/types'
 import Card from '../card/Card'
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  margin: 15px -15px;
-`
+import { Container } from './styled'
 
 function CardsList() {
-  const { data: selectedRickData } = useQuery(querys.GET_SELECTED_RICK)
-  const { data: selectedMortyData } = useQuery(querys.GET_SELECTED_MORTY)
   const { data: searchTermData } = useQuery(querys.GET_SEARCH_TERM)
   const { loading, data: CharactersData } = useQuery<{ characters: { results: Character[] } }>(
     querys.GET_CHARACTERS_BY_NAME,
     {
-      variables: { term: searchTermData?.searchTerm || '' }
+      variables: { term: searchTermData?.searchTerm || '' },
+      skip: searchTermData?.searchTerm.length <= 2
     }
   )
 
@@ -58,12 +48,14 @@ function CardsList() {
   const selectCard = useCallback(
     (card: Character) => {
       if (card.name.toLowerCase().includes('rick')) {
-        console.log('Rick')
-        selectRickCard(selectedRickData?.selectedRick, card)
+        console.log('Rick selected')
+        // TODO mutation
+        // selectRickCard(selectedRickData?.selectedRick, card)
       }
       if (card.name.toLowerCase().includes('morty')) {
-        console.log('Morty')
-        selectMortyCard(selectedMortyData?.selectedMorty, card)
+        console.log('Morty selected')
+        // TODO mutation
+        // selectMortyCard(selectedMortyData?.selectedMorty, card)
       }
     },
     [selectRickCard, selectMortyCard]
