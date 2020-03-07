@@ -53,7 +53,7 @@ function CardsList() {
                 onDelete={character => {
                   addToBanList({ variables: { id: character.id } })
                 }}
-              ></Card>
+              />
             ))}
         </>
       ) : (

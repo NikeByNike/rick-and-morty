@@ -48,6 +48,16 @@ export const resolvers: Resolvers = {
       const fragmentOfCharacter = cache.readFragment({ fragment, id: idInCache })
       cache.writeData({ id: idInCache, data: { ...fragmentOfCharacter, isInBanList: true } })
 
+      // Delete from selected
+      const { selectedRick } = cache.readQuery({ query: querys.GET_SELECTED_RICK })
+      const { selectedMorty } = cache.readQuery({ query: querys.GET_SELECTED_MORTY })
+      if (selectedRick && selectedRick.id === id) {
+        cache.writeData({ data: { selectedRick: null } })
+      }
+      if (selectedMorty && selectedMorty.id === id) {
+        cache.writeData({ data: { selectedMorty: null } })
+      }
+
       return
     },
 
