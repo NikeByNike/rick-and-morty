@@ -12,8 +12,8 @@ function Party() {
     <Container>
       <Title>Party</Title>
       <Row>
-        <Card character={selectedRickData.selectedRick} title="Rick" />
-        <Card character={selectedMortyData.selectedMorty} title="Morty" />
+        <Card data-testid="selectedRick" character={selectedRickData.selectedRick} title="Rick" />
+        <Card data-testid="selectedMorty" character={selectedMortyData.selectedMorty} title="Morty" />
       </Row>
     </Container>
   )

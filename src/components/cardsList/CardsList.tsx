@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 import querys from '../../API/querys'
 import { Character } from '../../API/types'
 import Card from '../card/Card'
@@ -25,13 +25,11 @@ function CardsList() {
         console.log('Rick selected')
         // TODO mutation
         selectRick({ variables: { character: card } })
-        // selectRickCard(selectedRickData?.selectedRick, card)
       }
       if (card.name.toLowerCase().includes('morty')) {
         console.log('Morty selected')
         // TODO mutation
         selectMorty({ variables: { character: card } })
-        // selectMortyCard(selectedMortyData?.selectedMorty, card)
       }
     },
     [selectRick, selectMorty]
@@ -45,6 +43,7 @@ function CardsList() {
             ?.filter(item => !item.isInBanList)
             .map(item => (
               <Card
+                data-testid="card"
                 isSelectable={true}
                 character={item}
                 key={item.id}
@@ -54,9 +53,7 @@ function CardsList() {
                 onDelete={character => {
                   addToBanList({ variables: { id: character.id } })
                 }}
-              >
-                {item.name}
-              </Card>
+              ></Card>
             ))}
         </>
       ) : (

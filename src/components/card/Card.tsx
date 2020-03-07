@@ -12,12 +12,11 @@ type Props = {
 
 function Card({ ref, title, character, onSelect, onDelete, isSelectable, children, ...restProps }: Props) {
   return (
-    <CardComp isSelectable={!!isSelectable} isSelected={!!character?.isSelected}>
+    <CardComp isSelectable={!!isSelectable} isSelected={!!character?.isSelected} {...restProps}>
       <Image
         onClick={() => isSelectable && onSelect && character && onSelect(character)}
         src={character ? character.image : ''}
         alt={character ? character.name : ''}
-        {...restProps}
       />
       {isSelectable && (
         <Button

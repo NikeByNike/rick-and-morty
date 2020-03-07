@@ -2,8 +2,9 @@ import ApolloClient, { gql, Resolvers } from 'apollo-boost'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import querys from './querys'
 import { Character } from './types'
+import { typeDefs } from './typeDefs'
 
-const initState = {
+export const initState = {
   searchTerm: '',
   selectedRick: null,
   selectedMorty: null,
@@ -14,7 +15,7 @@ const cache: InMemoryCache = new InMemoryCache()
 
 cache.writeData({ data: initState })
 
-const resolvers: Resolvers = {
+export const resolvers: Resolvers = {
   Character: {
     isSelected: (character: Character, _args, { cache }) => {
       const { selectedRick } = cache.readQuery({ query: querys.GET_SELECTED_RICK })
@@ -23,7 +24,6 @@ const resolvers: Resolvers = {
     },
     isInBanList: (character: Character, _args, { cache }) => {
       const { banList } = cache.readQuery({ query: querys.GET_BAN_LIST })
-      console.log(banList)
       return banList.includes(character.id)
     }
   },
@@ -118,7 +118,8 @@ const resolvers: Resolvers = {
 const client = new ApolloClient({
   uri: 'https://rickandmortyapi.com/graphql',
   cache,
-  resolvers
+  resolvers,
+  typeDefs
 })
 
 export default client

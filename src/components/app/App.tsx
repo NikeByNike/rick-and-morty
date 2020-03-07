@@ -23,7 +23,7 @@ function App() {
         <Checkbox onChange={checked => setIsWhiteTheme(!checked)} />
       </Fixed>
       <Container>
-        <CustomInput onChange={e => setSearchTerm(e.target.value)} type="text" />
+        <CustomInput aria-label="input" onChange={e => setSearchTerm(e.target.value)} type="text" />
         <CardsList />
         <Party />
       </Container>

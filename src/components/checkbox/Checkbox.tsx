@@ -10,7 +10,7 @@ function Checkbox({ onChange }: Props) {
 
   useEffect(() => {
     onChange(isChecked)
-  }, [isChecked])
+  }, [isChecked, onChange])
 
   return (
     <Body>
