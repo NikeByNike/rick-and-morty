@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components'
 const Input = styled.input`
   padding: 20px;
   text-transform: uppercase;
-  background: #ffffff;
-  border: 1px solid #a0a0a0;
+  background: ${props => props.theme.main};
+  border: 1px solid ${props => props.theme.second};
   box-sizing: border-box;
   font-style: normal;
   font-weight: 300;
@@ -14,7 +14,7 @@ const Input = styled.input`
 
   width: 100%;
 
-  color: #000000;
+  color: ${props => props.theme.second};
 `
 
 function CustomInput({

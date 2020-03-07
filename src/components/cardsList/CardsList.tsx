@@ -43,8 +43,6 @@ function CardsList() {
 
   const selectMortyCard = useCallback(
     (selected: Character, newCard: Character) => {
-      console.log(selected)
-      console.log(newCard)
       if (!selected) {
         client.writeData({ data: { selectedMorty: { ...newCard, isSelected: true } } })
       } else if (selected && selected.id === newCard.id) {
@@ -79,6 +77,7 @@ function CardsList() {
         <>
           {CharactersData?.characters?.results?.map(item => (
             <Card
+              isSelectable={true}
               character={item}
               key={item.id}
               onSelect={character => {
