@@ -1,7 +1,18 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks'
+import styled from 'styled-components'
 import querys from '../../API/querys'
 import { Character } from '../../API/types'
+import Card from '../card/Card'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 15px -15px;
+`
 
 function CardsList() {
   const { data: selectedRickData } = useQuery(querys.GET_SELECTED_RICK)
@@ -10,8 +21,7 @@ function CardsList() {
   const { loading, data: CharactersData } = useQuery<{ characters: { results: Character[] } }>(
     querys.GET_CHARACTERS_BY_NAME,
     {
-      variables: { term: searchTermData?.searchTerm || '' },
-      pollInterval: 300
+      variables: { term: searchTermData?.searchTerm || '' }
     }
   )
 
@@ -21,11 +31,11 @@ function CardsList() {
   const selectRickCard = useCallback(
     (selected: Character, newCard: Character) => {
       if (!selected) {
-        client.writeData({ data: { selectedRick: newCard } })
+        client.writeData({ data: { selectedRick: { ...newCard, isSelected: true } } })
       } else if (selected && selected.id === newCard.id) {
         client.writeData({ data: { selectedRick: null } })
       } else if (selected && selected.id !== newCard.id) {
-        client.writeData({ data: { selectedRick: newCard } })
+        client.writeData({ data: { selectedRick: { ...newCard, isSelected: true } } })
       }
     },
     [client, changeIsSelected]
@@ -36,12 +46,12 @@ function CardsList() {
       console.log(selected)
       console.log(newCard)
       if (!selected) {
-        client.writeData({ data: { selectedMorty: newCard } })
+        client.writeData({ data: { selectedMorty: { ...newCard, isSelected: true } } })
       } else if (selected && selected.id === newCard.id) {
         console.log('das')
         client.writeData({ data: { selectedMorty: null } })
       } else if (selected && selected.id !== newCard.id) {
-        client.writeData({ data: { selectedMorty: newCard } })
+        client.writeData({ data: { selectedMorty: { ...newCard, isSelected: true } } })
       }
     },
     [client, changeIsSelected]
@@ -61,26 +71,31 @@ function CardsList() {
     [selectRickCard, selectMortyCard]
   )
 
+  const deleteCard = useCallback((card: Character) => {}, [])
+
   return (
-    <div className="List">
+    <Container>
       {!loading ? (
         <>
           {CharactersData?.characters?.results?.map(item => (
-            <div
+            <Card
+              character={item}
               key={item.id}
-              style={item.isSelected ? { color: 'red' } : undefined}
-              onClick={() => {
-                selectCard(item)
+              onSelect={character => {
+                selectCard(character)
+              }}
+              onDelete={character => {
+                deleteCard(character)
               }}
             >
               {item.name}
-            </div>
+            </Card>
           ))}
         </>
       ) : (
         <div>Loading...</div>
       )}
-    </div>
+    </Container>
   )
 }
 

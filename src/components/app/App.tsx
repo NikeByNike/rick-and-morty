@@ -1,18 +1,34 @@
 import React from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import styled from 'styled-components'
 import querys from '../../API/querys'
+import { debounce } from '../../helpers/functions'
 import CardsList from '../cardsList/CardsList'
+import CustomInput from '../customInput/CustomInput'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  padding: 50px;
+`
 
 function App() {
   const [changeSearchTerm] = useMutation(querys.CHANGE_SEARCH_TERM)
-  console.log(process.env.NODE_ENV)
+
+  const setSearchTerm = debounce((term: string) => {
+    changeSearchTerm({ variables: { term } })
+  }, 500)
 
   return (
-    <div className="App">
+    <Container>
       <header className="App-header">Learn React</header>
-      <input onChange={e => changeSearchTerm({ variables: { term: e.target.value } })} type="text" />
+      <CustomInput onChange={e => setSearchTerm(e.target.value)} type="text" />
       <CardsList />
-    </div>
+    </Container>
   )
 }
 
