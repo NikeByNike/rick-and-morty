@@ -8,6 +8,7 @@ import CardsList from '../cardsList/CardsList'
 import CustomInput from '../customInput/CustomInput'
 import Checkbox from '../checkbox/Checkbox'
 import Party from '../party/Party'
+import Card from '../card/Card'
 
 function App() {
   const [isWhiteTheme, setIsWhiteTheme] = useState(true)

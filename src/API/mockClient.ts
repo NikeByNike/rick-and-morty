@@ -42,8 +42,25 @@ export const mocks = [
       data: {
         characters: {
           results: [
-            { id: '1', name: 'Morty 1', image: '', __typename: 'Character' },
-            { id: '2', name: 'Morty 2', image: '', __typename: 'Character' }
+            { id: '3', name: 'Morty 1', image: '', __typename: 'Character' },
+            { id: '4', name: 'Morty 2', image: '', __typename: 'Character' }
+          ],
+          __typename: 'Characters'
+        }
+      }
+    }
+  },
+  {
+    request: {
+      query: querys.GET_CHARACTERS_BY_NAME,
+      variables: { term: 'Ant' }
+    },
+    result: {
+      data: {
+        characters: {
+          results: [
+            { id: '5', name: 'Ants in my Eyes Johnson', image: '', __typename: 'Character' },
+            { id: '6', name: 'Million Ants', image: '', __typename: 'Character' }
           ],
           __typename: 'Characters'
         }
