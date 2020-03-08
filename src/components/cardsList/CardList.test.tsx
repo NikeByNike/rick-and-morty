@@ -25,8 +25,8 @@ test('test render Cards', async () => {
   await wait()
 
   expect(queryAllByTestId('card').length).toBe(2)
-  expect(queryAllByTestId('card')[0].getElementsByTagName('img')[0]).toHaveAttribute('alt', 'Rick')
-  expect(queryAllByTestId('card')[1].getElementsByTagName('img')[0]).toHaveAttribute('alt', 'Morty')
+  expect(queryAllByTestId('card')[0].getElementsByTagName('img')[0]).toHaveAttribute('alt', 'Rick 1')
+  expect(queryAllByTestId('card')[1].getElementsByTagName('img')[0]).toHaveAttribute('alt', 'Rick 2')
 })
 
 test('test delete Card', async () => {
@@ -39,8 +39,8 @@ test('test delete Card', async () => {
   await wait()
 
   expect(getAllByTestId('card').length).toBe(2)
-  expect(getAllByTestId('card')[0].getElementsByTagName('img')[0]).toHaveAttribute('alt', 'Rick')
-  expect(getAllByTestId('card')[1].getElementsByTagName('img')[0]).toHaveAttribute('alt', 'Morty')
+  expect(getAllByTestId('card')[0].getElementsByTagName('img')[0]).toHaveAttribute('alt', 'Rick 1')
+  expect(getAllByTestId('card')[1].getElementsByTagName('img')[0]).toHaveAttribute('alt', 'Rick 2')
   getAllByTestId('card')[0]
     .getElementsByTagName('button')[0]
     .click()
@@ -48,5 +48,5 @@ test('test delete Card', async () => {
   await wait()
 
   expect(getAllByTestId('card').length).toBe(1)
-  expect(getAllByTestId('card')[0].getElementsByTagName('img')[0]).toHaveAttribute('alt', 'Morty')
+  expect(getAllByTestId('card')[0].getElementsByTagName('img')[0]).toHaveAttribute('alt', 'Rick 2')
 })
